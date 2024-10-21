@@ -1,8 +1,16 @@
 body{
+    height: 100vh;
+}
+.flex-row{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .card{
     transition: 0.4s;
@@ -39,4 +47,16 @@ body{
 }
 .card:hover{
     transform: scale(1.1);
+}
+#table-holder{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 40rem;
+    height: 20rem;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+h1{
+    display: inline;
 }
