@@ -13,11 +13,18 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="row a-row-grid gap-3 mt-5">
-      <div class="col-sm bg-success">s</div>
-      <div class="col-sm bg-primary text-center modal-dialog-centered">
+    <div class="row a-row-grid mt-5">
+      <div class="col-sm a-banner-reg text-center">
+        <h2 class="display-4 text-dark" id="a-reg-header">
+          <b>Welcome To Web Weavers</b>
+        </h2>
+        <h6 class="display-6" style="font-size: 20pt">
+          Join us and lets create great things together!
+        </h6>
+      </div>
+      <div class="col-sm text-center a-reg-reg modal-dialog-centered">
         <div class="container">
-          <h3 class="h3">Register</h3>
+          <h3 class="h2 mb-4 text-light">Register</h3>
           <form action="">
             <div class="row">
               <div class="col">
@@ -56,15 +63,17 @@
               </div>
             </div>
             <label for="why-intrested"
-              ><h7 class="h7">Why are you inrested in the club?</h7></label
+              ><h6 class="h6 text-light">
+                Why are you inrested in the club?
+              </h6></label
             >
             <textarea
-              class="form-control"
+              class="form-control mt-2"
               name="club-intrest"
               id="why-intrested"
               required
             ></textarea>
-            <select name="major" id="major" class="form-select mt-5">
+            <select name="major" required id="major" class="form-select mt-5">
               <option value="is">Select Your Major</option>
               <optgroup label="CCIS">
                 <option value="IS">Information Systems</option>
@@ -94,11 +103,11 @@
               </optgroup>
             </select>
             <button
-              class="btn btn-secondary mt-5"
+              class="btn a-submit-btn btn-light mt-5"
               style="width: 10rem"
               type="submit"
             >
-              Submit
+              <b>Submit</b>
             </button>
           </form>
         </div>
