@@ -88,3 +88,24 @@ body{
     background-image: url(a-images/cobweb.jpg);
     background-size: contain;
 }
+.a-nav-float{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    overflow: hidden;
+    width: 425px;
+    height: 75px;
+    
+}
+.a-nav{
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+}
+.a-nav-img{
+    width: 80px;
+    border-radius: 20px;
+    padding: 0;
+    margin: 0;
+}
