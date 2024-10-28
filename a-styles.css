@@ -1,0 +1,111 @@
+body{
+    height: 100vh;
+}
+.flex-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    transition: 0.4s;
+    border: 1px solid black;
+    width: 15rem;
+    height: 13rem;
+}
+.card-body , .card-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-footer{
+    height: 4rem;
+}
+.icon{
+    width: 5rem;
+}
+.row{
+    margin: 0;
+}
+.col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3rem;
+}
+.card-link{
+   color: black;
+   text-decoration: none;
+}
+.card-link:hover{
+    color: chartreuse;
+}
+.card:hover{
+    transform: scale(1.1);
+}
+#table-holder{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 40rem;
+    height: 20rem;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.a-row-grid{
+    height: 40rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+#why-intrested{
+    height: 70px;
+    width: 100%;
+    padding-bottom:0.375rem !important;
+}
+.a-banner-reg{
+    background-image: url(a-images/web-eave-logo.jpeg);
+    background-position: center;
+    
+}
+.a-submit-btn{
+    height: 3rem;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+.a-submit-btn:hover{
+    transform: scale(1.1);
+}
+#a-reg-header{
+    opacity: 1 !important;
+}
+.a-reg-reg{
+    background-image: url(a-images/cobweb.jpg);
+    background-size: contain;
+}
+.a-nav-float{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    overflow: hidden;
+    width: 425px;
+    height: 75px;
+    
+}
+.a-nav{
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+}
+.a-nav-img{
+    width: 80px;
+    border-radius: 20px;
+    padding: 0;
+    margin: 0;
+}
