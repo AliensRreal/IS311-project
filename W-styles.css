@@ -1,0 +1,167 @@
+*{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    
+}
+
+body{
+    width: 100%;
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23222' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.W-logo{
+    border-radius: 25px;
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1rem;
+    transition: ease 0.5s;
+}
+
+.W-logo:hover {
+    color: white;
+    transform: scale(1.02);
+    transition: 0.5s ease;
+}
+
+.W-navbox a{
+    background-color: #d9d9d9;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 1px;
+    margin: 14px;
+    transition: ease 0.5s;
+    
+}
+
+
+.W-navbox a:hover{
+    color: rgb(255, 255, 255);
+    transform: scale(1.1);
+    transition: 0.5s ease;
+    text-shadow: 0 0 3px #000000;
+}
+
+.W-navbox a.active{
+    color: white;
+    border-bottom: 3px solid white;
+    text-shadow: 0 0 3px #000000;
+}
+
+.W-navbox{
+    width: fit-content;
+    height: fit-content;
+    background-color: #d9d9d9;
+    border: 1px;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 10px 14px 10px 10px;
+    box-shadow: inset 0 0 6px #000000;
+}
+
+.W-box{
+    width: 80%;
+    height: fit-content;
+    background-color: #d9d9d9;
+    border: 1px;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 10px 14px 10px 14px;
+    box-shadow: inset 0 0 10px #000000;
+}
+
+.W-box img{
+    max-width: 100%;
+    border-radius: 25px;
+    /*max-height: 20rem;*/
+}
+
+.W-box h1,h2,p,ul,h3,li{
+    padding: 5px;
+    background-color: none;
+    font-size: 20px;
+    margin: 10px;
+    text-align: left;
+}
+
+.W-btn{
+    background-color: #d9d9d9;
+    border: 1px;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: inset 0 0 10px #000000;
+}
+
+.W-containerw{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.W-containerw img{
+    border-radius: 25px;
+    
+}
+
+
+
+.W-containernav{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-content: end;
+}
+
+.W-container-myC{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+}
+
+.W-container-myC img{
+    border-radius: 25px;
+    height: 420px;
+}
+
+.W-card-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.W-hcard{
+    background-color: #747474;
+    width: 80%;
+    height: 12rem;
+    border: 1px;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 10px 14px 10px 10px;
+    box-shadow: inset 0 0 6px #000000;
+}
+
+.W-hcard img{
+    width: 150px;
+    border-radius: 25px;
+}
+
+.W-hcard p, h3 {
+    color: white;
+    font-size: 16px;
+    background-color: none;
+}
+
+/*@media screen and (max-width: 900px) {
+    .hcard {
+        flex-direction: column;
+    }
+}
+*/
+
+
+
