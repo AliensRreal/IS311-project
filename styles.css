@@ -114,3 +114,12 @@ body{
     height: 500px;
     border-radius: 20px;
 }
+.a-hide{
+
+}
+@media screen and (max-width:800px) {
+    
+    .a-hide{
+        display: none;
+    }
+}

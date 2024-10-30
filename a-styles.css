@@ -42,9 +42,7 @@ body{
    color: black;
    text-decoration: none;
 }
-.card-link:hover{
-    color: chartreuse;
-}
+
 .card:hover{
     transform: scale(1.1);
 }
