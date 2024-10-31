@@ -77,6 +77,7 @@ body{
     height: 3rem;
     border-radius: 15px;
     transition: 0.3s;
+    animation: breath 1s infinite ;
 }
 .a-submit-btn:hover{
     transform: scale(1.1);
@@ -121,5 +122,16 @@ body{
     
     .a-hide{
         display: none;
+    }
+}
+@keyframes breath {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
     }
 }
