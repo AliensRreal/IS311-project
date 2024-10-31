@@ -43,7 +43,7 @@ body{
    text-decoration: none;
 }
 .card-link:hover{
-    color: chartreuse;
+    color: black;
 }
 .card:hover{
     transform: scale(1.1);

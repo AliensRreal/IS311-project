@@ -21,7 +21,7 @@ createTable(events);
 
 function createTable(arr){
     let holder= document.getElementById("table-holder");
-    let inner='<table id="table">'
+    let inner='<table class="bg-light" id="table">'
     for(let i=0;i<arr.length;i++){
         inner+='<tr>';
         for(let y=0;y<arr[i].length;y++){

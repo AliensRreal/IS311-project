@@ -9,48 +9,42 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="W-styles.css" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Members Table</title>
+    <title>Events Table</title>
   </head>
   <body>
-    <div class="container-fluid a-nav-float mt-2">
-      <nav
-        class="navbar navbar-expand-sm navbar-dark bg-dark a-nav-float a-nav"
-      >
-        <div class="container-fluid justify-content-center">
-          <button
-            class="navbar-toggler"
-            data-bs-toggle="collapse"
-            data-bs-target="#nav"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <ul
-            class="navbar-nav navbar-collapse collapse justify-content-center p-0"
-            id="nav"
-          >
-            <li class="nav-item m-1"><a href="" class="nav-link">Link</a></li>
-            <li class="nav-item m-1"><a href="" class="nav-link">Link</a></li>
-            <div class="navbar-brand m-0 p-0">
-              <a href="" class="nav-link text-light m-0 p-0"
-                ><img
-                  src="a-images/web-eave-logo-removebg-preview.png"
-                  class="a-nav-img"
-                  alt=""
-              /></a>
-            </div>
-            <li class="nav-item m-1"><a href="" class="nav-link">Link</a></li>
-            <li class="nav-item m-1"><a href="" class="nav-link">Link</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    <header>
+      <div class="container-fluid mt-4">
+          <div class="row">
+              <div class="col-3">
+                  <a href="Homepage.html"><img class="W-logo ms-3" src="images/966f4bce-da5d-47d8-bdd4-c0e5f6291a68.jpeg"></a>
+              </div>
+              <div class="col-3"></div>
+                  <div class="col-6 align-content-center">
+                      <div class="W-containernav">
+                          <div class="W-navbox">
+                              <nav>
+                                  <a href="Homepage.html">Home</a>
+                                  <a href="">About Us</a>
+                                  <a href="" target="_blank">Contact Us</a>
+                                  <a href="registeration-page.html" target="_blank">Join Us</a>
+                                  <a href="signin-page.html" target="_blank">Sign In</a>
+                              </nav>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
     <div class="flex-col" style="height: 90vh">
-      <h2 class="h2">Events List</h2>
+      <h2 class="h2 text-light">Events List</h2>
       <div class="container" id="table-holder"></div>
       <hr />
       <div class="row">
-        <div class="col p-0 me-2 mt-2 btn btn-outline-dark">Add Event</div>
+        <div class="col p-0 me-2 mt-2 btn btn-outline-light">Add Event</div>
         <div class="col p-0 ms-2 mt-2 btn btn-danger">Remove Event</div>
       </div>
     </div>
