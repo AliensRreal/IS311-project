@@ -1,4 +1,4 @@
-let events=[
+/*let events=[
     ['ID','Name','Role'],
     [1,'Anmar','Admin'],
     [2,'Wafi','Admin'],
@@ -14,7 +14,7 @@ let events=[
     [12,'Anyone','Finance']
 ]
 
-createTable(events);
+createTable(events);*/
 
 
 
