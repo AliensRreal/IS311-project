@@ -65,6 +65,70 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="table-fetch.js"></script>
+    <script>
+      getEventData();
+
+      function getEventData(){
+        fetch('/data/events')
+        .then(res => res.json())
+        .then( data => {
+          let htmlString = `<tr><th>EID</th><th>Name</th><th>Date</th><th>Duration</th><th>Location</th><th>Type</th><th>Description</th></tr>`
+          for(d in data){
+            htmlString += `<tr>
+              <td>${data[d].EVENT_ID}</td>
+              <td>${data[d].EVENT_NAME}</td>
+              <td>${data[d].EVENT_DATE}</td>
+              <td>${data[d].EVENT_DURATION}</td>
+              <td>${data[d].EVENT_LOCATION}</td>
+              <td>${data[d].EVENT_TYPE}</td>
+              <td>${data[d].EVENT_DISCRIPTION}</td>
+              </tr>`
+          }
+          document.getElementById('table-holder').innerHTML = `<table class="table table-striped table-hover bg-light">${htmlString}</table>`
+        } )
+      }
+
+      function getEvent(){
+        let id = document.getElementById('eid').value
+        fetch('/data/events/' + id)
+        .then(res => res.json())
+        .then( data => {
+          {
+            document.getElementById('event-name').value = data.EVENT_NAME
+            document.getElementById('event-date').value = data.EVENT_DATE
+            document.getElementById('event-duration').value = data.EVENT_DURATION
+            document.getElementById('event-location').value = data.EVENT_LOCATION
+            document.getElementById('event-type').value = data.EVENT_TYPE
+            document.getElementById('event-discription').value = data.EVENT_DISCRIPTION
+          }
+          })
+        }
+      
+
+      function updateEvent(){
+        let id = document.getElementById('eid').value
+        fetch('/data/events/' + id, {
+          method: PUT,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            event_name: document.getElementById('event-name').value,
+            event_date: document.getElementById('event-date').value,
+            event_duration: document.getElementById('event-duration').value,
+            event_location: document.getElementById('event-location').value,
+            event_type: document.getElementById('event-type').value,
+            event_discription: document.getElementById('event-discription').value
+          })
+        })
+      }
+
+      function deleteEvent(){
+        let id = document.getElementById('eid').value
+        fetch('/data/events/' + id, {
+          method: DELETE
+        })
+      }
+    </script>
   </body>
 </html>
