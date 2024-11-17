@@ -1,11 +1,11 @@
 const express = require("express");
-const mysql = require("mysql2");
+const mysql = require("mysql");
 const app = express();
 //------------
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "WSQL2018",
+  password: "sequel",
   database: "student_club",
 });
 //------------
@@ -17,7 +17,7 @@ db.connect((err) => {
   if (err) throw err;
   console.log("Database connected");
 });
-//------------
+//------------ select all
 app.get("/data/members", (req, res) => {
   let query = `
         SELECT * 
@@ -41,7 +41,7 @@ app.get("/data/events", (req, res) => {
     console.log("All Events Selected");
   });
 });
-//------------
+//------------ select with id
 app.get("/data/members/:id", (req, res) => {
   let query = `
           SELECT * 
@@ -67,7 +67,7 @@ app.get("/data/events/:id", (req, res) => {
     console.log("All members Selected");
   });
 });
-//------------
+//------------ update
 app.put("/data/members/:id", (req, res) => {
   let rid = 0;
   let id = req.params.id;
@@ -109,7 +109,31 @@ app.put("/data/members/:id", (req, res) => {
     if (err) throw err;
   });
 });
+app.put("/data/events/:id", (req, res) => {
+  let id = req.params.id;
+  let event = {
+    event_name: req.body.event_name,
+    event_date: req.body.event_date,
+    event_duration: req.body.event_duration,
+    event_location: req.body.event_location,
+    event_type: req.body.event_type,
+    event_discription: req.body.event_discription,
+  };
+  let query = `
+        UPDATE events 
+        SET event_name = '${event.event_name}',
+        event_date   = '${member.last_name}',
+        event_duration=  ${member.email},
+        event_location=  '${member.phone}',
+        event_type=  '${member.join_data}', 
+        WHERE MEMBER_ID = ${id}
+      `;
+  db.query(query, (err, results) => {
+    if (err) throw err;
+  });
+});
 
+//------------ add
 app.post("/data/members", (req, res) => {
   let rid = 0;
   if (role_name.toUpperCase() === "EVENT MANAGMENT") {
@@ -147,6 +171,54 @@ app.post("/data/members", (req, res) => {
                          ${member.role_id}
 )
   `;
+  db.query(query, (err, results) => {
+    if (err) throw err;
+  });
+});
+app.post("/data/events", (req, res) => {
+  let event = {
+    event_name: req.body.event_name,
+    event_date: req.body.event_date,
+    event_duration: req.body.event_duration,
+    event_location: req.body.event_location,
+    event_type: req.body.event_type,
+    event_discription: req.body.event_discription,
+  };
+  let query = `
+      INSERT INTO events (event_name,event_date,event_duration,event_location,event_type,EVENT_DISCRIPTION)
+      VALUES (
+      '${event.event_name}',
+      '${event.event_date}',
+      ${event.event_duration},'
+      ${event.event_location}',
+      '${event.event_type}',
+      '${event.event_discription}'
+  )
+    `;
+  db.query(query, (err, results) => {
+    if (err) throw err;
+  });
+});
+//------------ delete
+app.delete("/data/members/:id", (req, res) => {
+  let id = req.params.id;
+  let query = `
+    DELETE FROM members
+    WHERE MEMBER_ID = ${id}
+    `;
+  db.query(query, (err) => {
+    if (err) throw err;
+  });
+});
+app.delete("/data/events/:id", (req, res) => {
+  let id = req.params.id;
+  let query = `
+    DELETE FROM events
+    WHERE EVENT_ID = ${id}
+    `;
+  db.query(query, (err) => {
+    if (err) throw err;
+  });
 });
 
 app.listen(3000, (err) => {
