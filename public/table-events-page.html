@@ -72,16 +72,13 @@
         fetch('/data/events')
         .then(res => res.json())
         .then( data => {
-          let htmlString = `<tr><th>EID</th><th>Name</th><th>Date</th><th>Duration</th><th>Location</th><th>Type</th><th>Description</th></tr>`
+          let htmlString = `<tr><th>EID</th><th>Name</th><th>Location</th><th>Type</th></tr>`
           for(d in data){
             htmlString += `<tr>
               <td>${data[d].EVENT_ID}</td>
               <td>${data[d].EVENT_NAME}</td>
-              <td>${data[d].EVENT_DATE}</td>
-              <td>${data[d].EVENT_DURATION}</td>
               <td>${data[d].EVENT_LOCATION}</td>
               <td>${data[d].EVENT_TYPE}</td>
-              <td>${data[d].EVENT_DISCRIPTION}</td>
               </tr>`
           }
           document.getElementById('table-holder').innerHTML = `<table class="table table-striped table-hover bg-light">${htmlString}</table>`
