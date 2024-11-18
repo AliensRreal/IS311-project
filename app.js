@@ -91,7 +91,7 @@ app.put("/data/members/:id", (req, res) => {
     last_name: req.body.last_name,
     email: req.body.email,
     phone: req.body.phone,
-    join_data: req.body.join_date,
+    join_data: "2024-11-18",
     role_id: rid,
   };
   let query = `
@@ -121,20 +121,25 @@ app.put("/data/events/:id", (req, res) => {
   let query = `
         UPDATE events 
         SET event_name = '${event.event_name}',
-        event_date   = '${member.last_name}',
-        event_duration=  ${member.email},
-        event_location=  '${member.phone}',
-        event_type=  '${member.join_data}', 
-        WHERE MEMBER_ID = ${id}
+        event_date   = '2024-11-18',
+        event_duration=  ${event.event_duration},
+        event_location=  '${event.event_location}',
+        event_type=  '${event.event_type}'
+        WHERE EVENT_ID = ${id}
       `;
   db.query(query, (err, results) => {
-    if (err) throw err;
+    if (err) {
+      res.send({ respond: "Failed to add event" });
+      throw err;
+    }
+    res.send({ respond: "Event added successfully" });
   });
 });
 
 //------------ add
 app.post("/data/members", (req, res) => {
   let rid = 0;
+  let role_name = req.body.role_name;
   if (role_name.toUpperCase() === "EVENT MANAGMENT") {
     rid = 1;
   } else if (role_name.toUpperCase() === "DESIGN TEAM") {
@@ -156,9 +161,10 @@ app.post("/data/members", (req, res) => {
     last_name: req.body.last_name,
     email: req.body.email,
     phone: req.body.phone,
-    join_data: req.body.join_date,
+    join_data: "2024-11-18",
     role_id: rid,
   };
+  console.log(member);
   let query = `
     INSERT INTO members (FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,ROLE_ID)
     VALUES (
@@ -171,7 +177,11 @@ app.post("/data/members", (req, res) => {
 )
   `;
   db.query(query, (err, results) => {
-    if (err) throw err;
+    if (err) {
+      res.send({ respond: "Member is not added" });
+      throw err;
+    }
+    res.send({ respond: "Member added" });
   });
 });
 app.post("/data/events", (req, res) => {

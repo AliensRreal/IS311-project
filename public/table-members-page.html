@@ -39,16 +39,13 @@
           </div>
       </div>
   </header>
-    <div class="flex-col" style="height: 90vh">
+    <div class="flex-col" style="height: 60vh">
       <h2 class="h2 text-light">Members List</h2>
-      <div class="container" id="table-holder"></div>
+      <div class="container" id="tbl"></div>
       <hr />
      <div class="text-center">
 
-       <div class="row">
-         <div class="col p-0 me-2 mt-2 btn btn-outline-light">Add Member</div>
-         <div class="col p-0 ms-2 mt-2 btn btn-danger">Remove Member</div>
-       </div>
+       
        </div>
        <ul class="pagination mt-6 m-0 text-center p-0">
         <li class="page-item">
@@ -60,6 +57,106 @@
       </ul>
      </div>
      </div>
+     <div
+      class="container bg-dark text-light rounded-3 p-4"
+      style="max-width: 600px; margin: auto"
+    >
+      <h3 class="text-center mb-4">Students Search Portal</h3>
+      <form id="studentForm">
+        <div
+          id="statusIndicator"
+          class="text-center mb-3 p-2 rounded bg-info text-dark"
+          style="display: none"
+        ></div>
+
+        <div class="mb-3">
+          <label for="mid" class="form-label">Member ID:</label>
+          <input 
+            type="text"
+            id="mid"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="ex: 1234567"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="first-name" class="form-label">Student Name:</label>
+          <div class="d-flex gap-2">
+            <input 
+              type="text"
+              id="first-name"
+              class="form-control bg-secondary text-light border-0"
+              placeholder="First Name"
+            />
+            <input 
+              type="text"
+              id="last-name"
+              class="form-control bg-secondary text-light border-0"
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="role" class="form-label">Role:</label>
+          <input 
+            type="text"
+            id="role"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="ex: Manager"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input 
+            type="email"
+            id="email"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="example@example.com"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number:</label>
+          <input 
+            type="text"
+            id="phone"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="0512345678"
+          />
+        </div>
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+          <button type="button" id="searchBtn" onclick="getMember();enabler()" class="btn btn-secondary">
+            Search
+          </button>
+          <button type="button" id="addBtn" onclick="addMember()" class="btn btn-secondary">
+            Add
+          </button>
+          <button type="button" id="editBtn" disabled onclick="updateMember()" class="btn btn-secondary">
+            Edit
+          </button>
+          <button type="button" id="deleteBtn" disabled onclick="deleteMember()" class="btn btn-secondary">
+            Delete
+          </button>
+          <button type="button" id="resetBtn" onclick="cleaner()"  class="btn btn-secondary">
+            Reset
+          </button>
+          <button
+            type="button"
+            id="goBackBtn"
+            class="btn btn-secondary"
+            style="display: none"
+          >
+            Go Back
+          </button>
+          <button
+            type="submit"
+            id="submitBtn"
+            class="btn btn-secondary"
+            style="display: none"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
     
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -68,7 +165,25 @@
     ></script>
     <script>
       getMembersData();
-
+      function cleaner(){
+            document.getElementById('mid').disabled=false; 
+            document.getElementById('mid').value= '';
+            document.getElementById('first-name').value = ''
+            document.getElementById('last-name').value = ''
+            document.getElementById('email').value =''
+            document.getElementById('phone').value = ''
+            document.getElementById('role').value = ''
+            document.getElementById("deleteBtn").disabled=true;
+            document.getElementById("editBtn").disabled=true;
+      }
+      function enabler(){
+        document.getElementById('mid').disabled=!document.getElementById('mid').disabled;
+            document.getElementById('first-name').disabled = false;
+            document.getElementById('last-name').disabled = false;
+            document.getElementById('email').disabled =false;
+            document.getElementById('phone').disabled = false;
+            document.getElementById('role').disabled = false;
+      }
       function getMembersData(){
         fetch('/data/members')
         .then(res => res.json())
@@ -82,7 +197,7 @@
               <td>${data[d].PHONE}</td>
               <td>${data[d].ROLE_NAME}</td></tr>`
           }
-          document.getElementById('table-holder').innerHTML = `<table class="table table-striped table-hover bg-light">${htmlString}</table>`
+          document.getElementById('tbl').innerHTML = `<table class="table table-striped table-hover bg-light">${htmlString}</table>`
         } )
       }
 
@@ -92,14 +207,16 @@
         .then(res => res.json())
         .then( data => {
           {
-            document.getElementById('first-name').value = data.FIRST_NAME
-            document.getElementById('last-name').value = data.LAST_NAME
-            document.getElementById('email').value = data.EMAIL
-            document.getElementById('phone').value = data.PHONE
-            document.getElementById('role').value = data.ROLE_NAME
+            console.log(data);
+            document.getElementById('first-name').value = data[0].FIRST_NAME
+            document.getElementById('last-name').value = data[0].LAST_NAME
+            document.getElementById('email').value = data[0].EMAIL
+            document.getElementById('phone').value = data[0].PHONE
+            document.getElementById('role').value = data[0].ROLE_NAME
           }
           })
-
+          document.getElementById("deleteBtn").disabled=false;
+          document.getElementById("editBtn").disabled=false;
           
         }
       
@@ -107,7 +224,7 @@
       function updateMember(){
         let id = document.getElementById('mid').value
         fetch('/data/members/' + id, {
-          method: PUT,
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -119,13 +236,43 @@
             role_name: document.getElementById('role').value
           })
         })
+        getMembersData();
       }
 
       function deleteMember(){
         let id = document.getElementById('mid').value
         fetch('/data/members/' + id, {
-          method: DELETE
+          method: 'DELETE'
         })
+        getMembersData();
+      }
+   
+      function addMember(){
+        let member = {
+          first_name: document.getElementById('first-name').value,
+          last_name: document.getElementById('last-name').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          role_name: document.getElementById('role').value
+        };
+        fetch('/data/members', {
+          method:'POST',
+          body: JSON.stringify({
+            first_name: member.first_name,
+            last_name: member.last_name,
+            email: member.email,
+            phone: member.phone,
+            role_name: member.role_name,
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+          .then(data =>{
+             alert(data.respond);
+          })
+          getMembersData();
       }
     </script>
   </body>

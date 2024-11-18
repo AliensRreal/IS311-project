@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="styles.css" />
     <title>Events Table</title>
   </head>
-  <body>
+  <body style="height: 200vh;">
     <header>
       <div class="container-fluid mt-4">
           <div class="row">
@@ -39,16 +39,13 @@
           </div>
       </div>
   </header>
-    <div class="flex-col" style="height: 90vh">
+    <div class="flex-col" style="height: 60vh">
       <h2 class="h2 text-light">Events List</h2>
-      <div class="container" id="table-holder"></div>
+      <div class="container" id="tbl"></div>
       <hr />
       <div class="text-center">
 
-        <div class="row">
-          <div class="col p-0 me-2 mt-2 btn btn-outline-light">Add Event</div>
-          <div class="col p-0 ms-2 mt-2 btn btn-danger">Remove Event</div>
-        </div>
+        
         </div>
         <ul class="pagination mt-6 m-0 text-center p-0">
           <li class="page-item">
@@ -58,7 +55,122 @@
             <a href="table-events-page.html" class="page-link bg-dark text-light"><div class="text-center" style="width: 100px;font-size: 11px;">Events &gt;</div></a>
           </li>
         </ul>
-     
+      </div>
+        <div
+      class="container bg-dark text-light rounded-3 p-4"
+      style="max-width: 600px; margin: auto"
+    >
+      <h3 class="text-center mb-4">Event Search Portal</h3>
+      <form id="eventForm">
+        <div
+          id="statusIndicator"
+          class="text-center mb-3 p-2 rounded bg-info text-dark"
+          style="display: none"
+        ></div>
+
+        <div class="mb-3">
+          <label for="eid" class="form-label">Event ID:</label>
+          <input
+            type="text"
+            id="eid"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="ex: 1234567"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="event-name" class="form-label">Event Name:</label>
+          <div class="d-flex gap-2">
+            <input 
+              type="text"
+              id="event-name"
+              class="form-control bg-secondary text-light border-0"
+              placeholder="First Name"
+            />
+          </div>
+          </div>
+        <div class="mb-3 ">
+          <label for="event-date" class="form-label">Event Date:</label>
+          <div class="d-flex gap-2">
+           
+            <input 
+              type="text"
+              id="event-date"
+              class="form-control bg-secondary text-light border-0"
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="event-duration" class="form-label">Event Duration:</label>
+          <input 
+            type="text"
+            id="event-duration"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="ex: Manager"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="event-location" class="form-label">Event Location:</label>
+          <input 
+            type="text"
+            id="event-location"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="example@example.com"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="event-type" class="form-label">Event Type:</label>
+          <input 
+            type="text"
+            id="event-type"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="0512345678"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="event-discription" class="form-label">Event Discription:</label>
+          <input 
+            Devent-discription="text"
+            id="event-discription"
+            class="form-control bg-secondary text-light border-0"
+            placeholder="0512345678"
+          />
+        </div>
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+          <button type="button" id="searchBtn" onclick="getEvent();enabler()" class="btn btn-secondary">
+            Search
+          </button>
+          <button type="button" id="addBtn" onclick="addEvent()" class="btn btn-secondary">
+            Add
+          </button>
+          <button type="button" id="editBtn" onclick="updateEvent()" disabled class="btn btn-secondary">
+            Edit
+          </button>
+          <button type="button" id="deleteBtn" onclick="deleteEvent()" disabled class="btn btn-secondary">
+            Delete
+          </button>
+          <button type="button" id="resetBtn" onclick="cleaner()"  class="btn btn-secondary">
+            Reset
+          </button>
+          <button
+            type="button"
+            id="goBackBtn"
+            class="btn btn-secondary"
+            style="display: none"
+          >
+            Go Back
+          </button>
+          <button
+            type="submit"
+            id="submitBtn"
+            class="btn btn-secondary"
+            style="display: none"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -66,8 +178,29 @@
       crossorigin="anonymous"
     ></script>
     <script>
+     
       getEventData();
-
+      function cleaner(){
+          document.getElementById('eid').disabled=false; 
+            document.getElementById('eid').value= '';
+            document.getElementById('event-name').value = '';
+            document.getElementById('event-date').value = '';
+            document.getElementById('event-duration').value ='';
+            document.getElementById('event-location').value = '';
+            document.getElementById('event-type').value ='';
+            document.getElementById('event-discription').value = '';
+            document.getElementById("deleteBtn").disabled=true;
+            document.getElementById("editBtn").disabled=true;
+      }
+      function enabler(){
+            document.getElementById('eid').disabled = !document.getElementById('eid').disabled;
+            document.getElementById('event-name').disabled = false;
+            document.getElementById('event-date').disabled = false;
+            document.getElementById('event-duration').disabled =false;
+            document.getElementById('event-location').disabled = false;
+            document.getElementById('event-type').disabled =false;
+            document.getElementById('event-discription').disabled = false;
+      }
       function getEventData(){
         fetch('/data/events')
         .then(res => res.json())
@@ -81,7 +214,8 @@
               <td>${data[d].EVENT_TYPE}</td>
               </tr>`
           }
-          document.getElementById('table-holder').innerHTML = `<table class="table table-striped table-hover bg-light">${htmlString}</table>`
+          console.log(htmlString);
+          document.getElementById('tbl').innerHTML = `<table class="table table-striped table-hover bg-light">${htmlString}</table>`
         } )
       }
 
@@ -91,21 +225,25 @@
         .then(res => res.json())
         .then( data => {
           {
-            document.getElementById('event-name').value = data.EVENT_NAME
-            document.getElementById('event-date').value = data.EVENT_DATE
-            document.getElementById('event-duration').value = data.EVENT_DURATION
-            document.getElementById('event-location').value = data.EVENT_LOCATION
-            document.getElementById('event-type').value = data.EVENT_TYPE
-            document.getElementById('event-discription').value = data.EVENT_DISCRIPTION
+            console.log(data)
+            document.getElementById('event-name').value = data[0].EVENT_NAME
+            document.getElementById('event-date').value = data[0].EVENT_DATE
+            document.getElementById('event-duration').value = data[0].EVENT_DURATION
+            document.getElementById('event-location').value = data[0].EVENT_LOCATION
+            document.getElementById('event-type').value = data[0].EVENT_TYPE
+            document.getElementById('event-discription').value = data[0].EVENT_DISCRIPTION
+
           }
           })
+          document.getElementById("deleteBtn").disabled=false;
+          document.getElementById("editBtn").disabled=false;
         }
       
 
       function updateEvent(){
         let id = document.getElementById('eid').value
         fetch('/data/events/' + id, {
-          method: PUT,
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -118,13 +256,45 @@
             event_discription: document.getElementById('event-discription').value
           })
         })
+        getEventData();
       }
 
       function deleteEvent(){
         let id = document.getElementById('eid').value
         fetch('/data/events/' + id, {
-          method: DELETE
+          method: 'DELETE'
         })
+        getEventData();
+      }
+      function addEvent(){
+        let event = {
+          event_name: document.getElementById('event-name').value,
+            event_date: document.getElementById('event-date').value,
+            event_duration: document.getElementById('event-duration').value,
+            event_location: document.getElementById('event-location').value,
+            event_type: document.getElementById('event-type').value,
+            event_discription: document.getElementById('event-discription').value
+        };
+        fetch('/data/events', {
+          method:'POST',
+          body: JSON.stringify({
+             event_name: event.event_name,
+             event_date: event.event_date,
+             event_duration: event.event_duration,
+             event_location: event.event_location,
+             event_type: event.event_type,
+             event_discription: event.event_discription
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+          .then(data =>{
+             alert(data.respond);
+          })
+          getEventData();
+
       }
     </script>
   </body>
