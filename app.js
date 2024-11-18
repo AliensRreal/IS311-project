@@ -5,7 +5,7 @@ const app = express();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "sequel",
   database: "student_club",
 });
 //------------
@@ -52,7 +52,6 @@ app.get("/data/members/:id", (req, res) => {
   db.query(query, (err, results) => {
     if (err) throw err;
     res.send(results);
-    console.log("All members Selected");
   });
 });
 app.get("/data/events/:id", (req, res) => {
@@ -64,12 +63,12 @@ app.get("/data/events/:id", (req, res) => {
   db.query(query, (err, results) => {
     if (err) throw err;
     res.send(results);
-    console.log("All members Selected");
   });
 });
 //------------ update
 app.put("/data/members/:id", (req, res) => {
   let rid = 0;
+  let role_name = req.body.role_name;
   let id = req.params.id;
   if (role_name.toUpperCase() === "EVENT MANAGMENT") {
     rid = 1;
