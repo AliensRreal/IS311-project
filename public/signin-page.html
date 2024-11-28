@@ -24,26 +24,58 @@
           class="form-control mb-3"
           name="username"
           placeholder="Username"
-          id="user"
+          id="username"
         />
         <input
           type="password"
           class="form-control"
-          name="Password"
+          name="password"
           placeholder="Password"
-          id="pass"
+          id="password"
         />
       </a>
     </form>
-    <a href="dashboard-page.html">
-      <button style="width: 7rem" class="btn btn-outline-light mt-4">
-        Sign in
+    
+      <button style="width: 7rem" onclick="signIn()" class="btn btn-outline-light mt-4">
+        Sign In
       </button>
+      <p id="invalid_msg" class="text-danger"></p>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function signIn(){
+        //Hint:
+        //username : admin
+        //password : admin
+        let acc = {
+          username : document.getElementById('username').value,
+          password : document.getElementById('password').value
+        }
+        fetch('/data/login', {
+          method : 'POST',
+          body : JSON.stringify(acc),
+          headers:{'Content-type':'application/json'}
+        }).then(res => res.json())
+          .then(data =>{
+            let empty =[];
+            if(data.length>0){
+              window.location.replace('http://localhost:3000/dashboard-page.html')
+              console.log('User found');
+              
+            }
+            else{
+              document.getElementById('invalid_msg').innerHTML='Invalid username or password'
+            }
+        })
+
+
+
+
+      }
+    </script>
   </body>
 </html>

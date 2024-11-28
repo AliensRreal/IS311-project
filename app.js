@@ -65,6 +65,22 @@ app.get("/data/events/:id", (req, res) => {
     res.send(results);
   });
 });
+app.post("/data/login", (req, res) => {
+  let acc = {
+    username: req.body.username,
+    password: req.body.password,
+  };
+  let query = `
+    SELECT *
+    FROM login 
+    WHERE username = '${acc.username}' AND password = '${acc.password}' 
+  `;
+  db.query(query, (err, results) => {
+    if (err) throw err;
+
+    res.send(results);
+  });
+});
 //------------ update
 app.put("/data/members/:id", (req, res) => {
   let rid = 0;
