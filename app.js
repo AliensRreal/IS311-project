@@ -98,7 +98,7 @@ app.put("/data/members/:id", (req, res) => {
     rid = 5;
   }
   if (rid === 0) {
-    console.log("invlaid role");
+    res.send({ respond: "Invalid Role" });
     return;
   }
 
@@ -110,6 +110,24 @@ app.put("/data/members/:id", (req, res) => {
     join_data: "2024-11-18",
     role_id: rid,
   };
+  let nn = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    join_data: "",
+  };
+
+  if (
+    member.first_name === nn.first_name ||
+    member.join_data === nn.join_data ||
+    member.phone === nn.phone ||
+    member.email === nn.email ||
+    member.last_name === nn.last_name
+  ) {
+    res.send({ respond: "Enter all required fields" });
+    return;
+  }
   let query = `
       UPDATE members 
       SET FIRST_NAME = '${member.first_name}',
@@ -134,6 +152,25 @@ app.put("/data/events/:id", (req, res) => {
     event_type: req.body.event_type,
     event_discription: req.body.event_discription,
   };
+  let nn = {
+    event_name: "",
+    event_date: "",
+    event_duration: "",
+    event_location: "",
+    event_type: "",
+    event_discription: "",
+  };
+  if (
+    event.event_name === nn.event_name ||
+    event.event_date === nn.event_date ||
+    event.event_duration === nn.event_duration ||
+    event.event_location === nn.event_location ||
+    event.event_type === nn.event_type ||
+    event.event_discription === nn.event_discription
+  ) {
+    res.send({ respond: "Enter all required fields" });
+    return;
+  }
   let query = `
         UPDATE events 
         SET event_name = '${event.event_name}',
@@ -148,13 +185,38 @@ app.put("/data/events/:id", (req, res) => {
       res.send({ respond: "Failed to add event" });
       throw err;
     }
-    res.send({ respond: "Event added successfully" });
+    res.send({ respond: "Event updated successfully" });
   });
 });
 
 //------------ add
 app.post("/data/members", (req, res) => {
   let rid = 0;
+  let nn = {
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    join_data: "",
+  };
+  let member = {
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    phone: req.body.phone,
+    join_data: "2024-11-18",
+    role_id: rid,
+  };
+  if (
+    member.first_name === nn.first_name ||
+    member.join_data === nn.join_data ||
+    member.phone === nn.phone ||
+    member.email === nn.email ||
+    member.last_name === nn.last_name
+  ) {
+    res.send({ respond: "Enter all required fields" });
+    return;
+  }
   let role_name = req.body.role_name;
   if (role_name.toUpperCase() === "EVENT MANAGMENT") {
     rid = 1;
@@ -168,18 +230,10 @@ app.post("/data/members", (req, res) => {
     rid = 5;
   }
   if (rid === 0) {
-    console.log("invlaid role");
+    res.send({ respond: "Invalid Role" });
     return;
   }
 
-  let member = {
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    phone: req.body.phone,
-    join_data: "2024-11-18",
-    role_id: rid,
-  };
   console.log(member);
   let query = `
     INSERT INTO members (FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,ROLE_ID)
@@ -189,7 +243,7 @@ app.post("/data/members", (req, res) => {
             '${member.email}' ,
               '${member.phone}',
                    '${member.join_data}', 
-                         ${member.role_id}
+                         ${rid}
 )
   `;
   db.query(query, (err, results) => {
@@ -209,6 +263,25 @@ app.post("/data/events", (req, res) => {
     event_type: req.body.event_type,
     event_discription: req.body.event_discription,
   };
+  let nn = {
+    event_name: "",
+    event_date: "",
+    event_duration: "",
+    event_location: "",
+    event_type: "",
+    event_discription: "",
+  };
+  if (
+    event.event_name === nn.event_name ||
+    event.event_date === nn.event_date ||
+    event.event_duration === nn.event_duration ||
+    event.event_location === nn.event_location ||
+    event.event_type === nn.event_type ||
+    event.event_discription === nn.event_discription
+  ) {
+    res.send({ respond: "Enter all required fields" });
+    return;
+  }
   let query = `
       INSERT INTO events (event_name,event_date,event_duration,event_location,event_type,EVENT_DISCRIPTION)
       VALUES (

@@ -254,8 +254,11 @@
             event_type: document.getElementById('event-type').value,
             event_discription: document.getElementById('event-discription').value
           })
+        }).then(res => res.json()).then(data =>{
+          alert(data.respond);
+          getEventData();
         })
-        getEventData();
+      
       }
 
       function deleteEvent(){

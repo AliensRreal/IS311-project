@@ -235,8 +235,12 @@
             phone: document.getElementById('phone').value,
             role_name: document.getElementById('role').value
           })
-        })
-        getMembersData();
+        }).then(res => res.json())
+          .then(data =>{
+             alert(data.respond);
+          })
+          getMembersData();
+      
       }
 
       function deleteMember(){
